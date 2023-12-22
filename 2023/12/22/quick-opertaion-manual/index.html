@@ -173,7 +173,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Fri Dec 22 2023 23:00:15 GMT+0800">2023-12-22 23:00:15</span>
+                <span class="pc" data-updated="Fri Dec 22 2023 23:28:55 GMT+0800">2023-12-22 23:28:55</span>
             </span>
         
 
@@ -198,8 +198,8 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <h3 id="Install-V2Ray-on-Ubuntu-22-04"><a href="#Install-V2Ray-on-Ubuntu-22-04" class="headerlink" title="Install V2Ray on Ubuntu 22.04"></a>Install V2Ray on Ubuntu 22.04</h3><p>这只是快捷操作命令，具体操作请参考官方手册。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install curl unzip</span><br></pre></td></tr></table></figure>
+                    <p>方便查询，快捷操作，各项配置混杂在一起。<br>具体操作请参考官方手册。</p>
+<h3 id="Install-V2Ray-on-Ubuntu-22-04"><a href="#Install-V2Ray-on-Ubuntu-22-04" class="headerlink" title="Install V2Ray on Ubuntu 22.04"></a>Install V2Ray on Ubuntu 22.04</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install curl unzip</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O &lt;https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh&gt;</span><br></pre></td></tr></table></figure>
 
@@ -276,7 +276,10 @@
 
 <h3 id="ssh服务自启动"><a href="#ssh服务自启动" class="headerlink" title="ssh服务自启动"></a>ssh服务自启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> ssh</span><br></pre></td></tr></table></figure>
 
-<h3 id="关闭ssh服务自启动"><a href="#关闭ssh服务自启动" class="headerlink" title="关闭ssh服务自启动"></a>关闭ssh服务自启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">disable</span> ssh</span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">### 配置BBR</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#### Check</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">sysctl net.ipv4.tcp_congestion_control</span><br></pre></td></tr></table></figure>
+<h3 id="关闭ssh服务自启动"><a href="#关闭ssh服务自启动" class="headerlink" title="关闭ssh服务自启动"></a>关闭ssh服务自启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">disable</span> ssh</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="配置BBR"><a href="#配置BBR" class="headerlink" title="配置BBR"></a>配置BBR</h3><h4 id="Check"><a href="#Check" class="headerlink" title="Check"></a>Check</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl net.ipv4.tcp_congestion_control</span><br></pre></td></tr></table></figure>
 
 <p>Display:</p>
 <figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_congestion_control = cubic</span><br></pre></td></tr></table></figure>
