@@ -9,7 +9,7 @@
     
     <title>
         
-            建立自己的知识库 |
+            数据库事务的基础知识 |
         
         Fenix blog
     </title>
@@ -163,7 +163,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        建立自己的知识库
+                        数据库事务的基础知识
                     </div>
                 
 
@@ -191,13 +191,13 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-check"></i>&nbsp;
-                <span class="pc">2023-12-26 16:20:29</span>
-                <span class="mobile">2023-12-26 16:20</span>
+                <span class="pc">2023-12-27 15:29:46</span>
+                <span class="mobile">2023-12-27 15:29</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Tue Dec 26 2023 19:16:09 GMT+0800">2023-12-26 19:16:09</span>
+                <span class="pc" data-updated="Wed Dec 27 2023 16:36:49 GMT+0800">2023-12-27 16:36:49</span>
             </span>
         
 
@@ -208,7 +208,10 @@
                 <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/">知识库</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/database/">database</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/transactions/">transactions</a></li>
                         
                     
                 </ul>
@@ -232,18 +235,170 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <p>这个博客搭建了很久很久了，只有搭建之初费劲巴拉的写了两篇，之后就一直空空如也。</p>
+                    <p>事务是数据库管理系统执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。<br>可以简单的理解为：对数据的一次操作就是一个事务。</p>
+<h2 id="事务的特性"><a href="#事务的特性" class="headerlink" title="事务的特性"></a>事务的特性</h2><p>事务具备四个特性：即原子性（Atomicity）、一致性（consistency）、隔离性（Isolation）、持久性（Durability），简称ACID。</p>
 <ul>
-<li><p>把Github Pages存放Blog这么好的功能充分利用上。</p>
-</li>
-<li><p>Hexo的框架方便好用。</p>
-</li>
-<li><p>keep的主题非常棒，完全满足需求。</p>
-</li>
-<li><p>把平时用到的资料整理好写成博客，方便查询。</p>
-</li>
+<li><strong>原子性：</strong> 事务作为一个整体被执行，其中对数据库的操作要么全部执行，要不都不执行（有始有终）。</li>
+<li><strong>一致性：</strong> 事务应确保数据库的状态从一个一致状态转变为另一个一致状态。一致状态的含义是数据库中的数据应满足完整性约束（表里如一）。</li>
+<li><strong>隔离性：</strong> 多个事务并发执行时，一个事务的执行不应该影响其他事务的执行（不多管闲事）。</li>
+<li><strong>持久性：</strong> 被提交的事务对数据库的修改应该永久保存在数据库中（一诺千金）。</li>
 </ul>
-<p>目标：就是逐步建成自己的知识库。</p>
+<h2 id="脏读、不可重复读、幻读"><a href="#脏读、不可重复读、幻读" class="headerlink" title="脏读、不可重复读、幻读"></a>脏读、不可重复读、幻读</h2><p>不同隔离级别与读问题的对照关系</p>
+<table>
+<thead>
+<tr>
+<th align="left">隔离级别</th>
+<th align="left">脏读</th>
+<th align="left">不可重复读</th>
+<th align="left">幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">读未提交（Read Uncommitted）</td>
+<td align="left">可能</td>
+<td align="left">可能</td>
+<td align="left">可能</td>
+</tr>
+<tr>
+<td align="left">读已提交（Read Committed）</td>
+<td align="left">不可能</td>
+<td align="left">可能</td>
+<td align="left">可能</td>
+</tr>
+<tr>
+<td align="left">可重复读（Repeatable Read）</td>
+<td align="left">不可能</td>
+<td align="left">不可能</td>
+<td align="left">可能</td>
+</tr>
+<tr>
+<td align="left">可串行化（Serializable）</td>
+<td align="left">不可能</td>
+<td align="left">不可能</td>
+<td align="left">不可能</td>
+</tr>
+</tbody></table>
+<p><strong>读未提交（Read Uncommitted）:</strong> 所有读问题都可能发生，一般不会使用这种隔离级别。<br><strong>读已提交（Read Committed）：</strong> 只能避免脏读发生，Oracle的默认隔离级别。<br><strong>可重复读（Repeatable Read）：</strong> 能够避免脏读和不可重复读发生，MySQL中InnoDB引擎默认的隔离级别。<br><strong>可串行化（Serializable）：</strong> 可以解决所有读问题，但由于是串行执行，性能相当一般，所以通常也不会使用。</p>
+<p>在MySQL中，可重复读级别就解决了幻读的问题。<br>假设有一张表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `K_V`</span><br><span class="line">(</span><br><span class="line">    `id`     <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;主键 id&#x27;</span>,</span><br><span class="line">    `<span class="keyword">value</span>`  <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> DUFAULT <span class="string">&#x27;0&#x27;</span> COMMENT <span class="string">&#x27;值&#x27;</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE <span class="operator">=</span> InnoDB <span class="keyword">DEFAULT</span> CHARSET <span class="operator">=</span> utf8mb4;</span><br></pre></td></tr></table></figure>
+
+<p>表中有如下数据：</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+------+------+</span><br><span class="line">| id   | value|</span><br><span class="line">+------+------+</span><br><span class="line">| 1    | 100  |</span><br><span class="line">| 2    | 100  |</span><br><span class="line">| 3    | 100  |</span><br></pre></td></tr></table></figure>
+
+<p>设置数据为手动提交事务：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> autocommit<span class="operator">=</span><span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="脏读（Dirty-Read）"><a href="#脏读（Dirty-Read）" class="headerlink" title="脏读（Dirty Read）"></a>脏读（Dirty Read）</h3><p>脏读是指一个事务（A）读到了另一个事务（B）未提交的数据。<br>比如，事务A读到事务B并未提交的数据，恰好事务B因某些因素而导致了事务回滚，那么刚刚事务A就相当于读到了实际上并不存在的数据，这就是脏读。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> session transaction isolation level read uncommitted;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">事务A</th>
+<th align="left">事务B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">begin;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">select value from k_v where id &#x3D; 1;(value&#x3D;100)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">begin;</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">update k_v set value &#x3D; value + 100 where id&#x3D;1;(value &#x3D; 200)</td>
+</tr>
+<tr>
+<td align="left">select value from k_v where id &#x3D; 1;(value &#x3D; 200)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">rollback;(value &#x3D; 100)</td>
+</tr>
+</tbody></table>
+<h3 id="不可重复读（Unrepeatable-Read）"><a href="#不可重复读（Unrepeatable-Read）" class="headerlink" title="不可重复读（Unrepeatable Read）"></a>不可重复读（Unrepeatable Read）</h3><p>不可重复读是指在一个事务内对同一条记录（可以理解为根据同一个id查询）进行多次查询的结果却不一致。</p>
+<p>比如，事务A查询了一次账户余额。之后，事务B在该账户中扣除了一笔钱（比如自动还款）并提交了事务。这时事务A再次查询账户余额，就会发现余额变了，这就属于不可重复读。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> session transaction isolation level read committed;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">事务A</th>
+<th align="left">事务B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">begin;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">begin;</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">update k_v set value &#x3D; value + 100 where id &#x3D; 1;(value &#x3D; 200)</td>
+</tr>
+<tr>
+<td align="left">select value from k_v where id &#x3D; 1;(value &#x3D; 100)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">commit;(value &#x3D; 100)</td>
+</tr>
+<tr>
+<td align="left">select value from k_v where id &#x3D; 1;(value &#x3D; 200)</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="幻读（Phantom-Read）"><a href="#幻读（Phantom-Read）" class="headerlink" title="幻读（Phantom Read）"></a>幻读（Phantom Read）</h3><p>幻读是指在同一个事务内进行多次操作之间，产生了新的数据或删除了已有数据，并对后续的操作造成了影响。</p>
+<p>比如，事务A统计了id大于1的数据。之后，事务B插入了一条id为4的数据并提交了事务。这时事务A再次统计id大于1的数据，就会发现多了一条，这就产生了幻读。</p>
+<table>
+<thead>
+<tr>
+<th align="left">事务A</th>
+<th align="left">事务B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">begin;</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">select count(*) form k_v where id&gt;1;(两条)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">begin;</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">insert into k_v values(4,100);</td>
+</tr>
+<tr>
+<td align="left">select count(*) from k_v where id&gt;1;(两条)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">commit;</td>
+</tr>
+<tr>
+<td align="left">select count(*) from k_v where id&gt;1;(三条)</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p><strong>区别</strong><br><strong>脏读</strong>指的是一个事务读到了其他事务未提交的数据。<br><strong>不可重复读</strong>指的是一个事务中多次读到同一条（多条）数据发生了变化，重点在于表里已经存在的数据被其他事务修改了（update）。<br><strong>幻读</strong>指的是一个事务被其他事务插入或删除的数据所影响，重点在于事务开始后，其他事务插入或删除了数据（insert&#x2F;delete）。</p>
+<p>脏读、不可重复读、幻读是在并发事务的情况下才发生的。为了解决这些问题，数据库引入了隔离级别，并且不同的隔离级别可以解决不同的问题。</p>
 
                 </div>
 
@@ -255,7 +410,11 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/">知识库</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/database/">database</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/transactions/">transactions</a>
                                     </li>
                                 
                             </ul>
@@ -271,31 +430,15 @@
                 
                     <div class="post-nav border-box">
                         
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/2023/12/27/the-basics-of-database-transactions/"
-                                   title="数据库事务的基础知识"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">数据库事务的基础知识</span>
-                                        <span class="post-nav-item">上一篇</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
                         
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2023/12/22/Set-up-ufw-for-ubuntu2204/"
-                                   title="Set up ufw for ubuntu2204"
+                                   href="/2023/12/26/write-only-a-blog-for-my-own/"
+                                   title="建立自己的知识库"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Set up ufw for ubuntu2204</span>
+                                        <span class="post-nav-title-item text-ellipsis">建立自己的知识库</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -323,7 +466,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-text">事务的特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E3%80%81%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E3%80%81%E5%B9%BB%E8%AF%BB"><span class="nav-text">脏读、不可重复读、幻读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%EF%BC%88Dirty-Read%EF%BC%89"><span class="nav-text">脏读（Dirty Read）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%88Unrepeatable-Read%EF%BC%89"><span class="nav-text">不可重复读（Unrepeatable Read）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%EF%BC%88Phantom-Read%EF%BC%89"><span class="nav-text">幻读（Phantom Read）</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -453,7 +596,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-text">事务的特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%E3%80%81%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E3%80%81%E5%B9%BB%E8%AF%BB"><span class="nav-text">脏读、不可重复读、幻读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%8F%E8%AF%BB%EF%BC%88Dirty-Read%EF%BC%89"><span class="nav-text">脏读（Dirty Read）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%88Unrepeatable-Read%EF%BC%89"><span class="nav-text">不可重复读（Unrepeatable Read）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BB%E8%AF%BB%EF%BC%88Phantom-Read%EF%BC%89"><span class="nav-text">幻读（Phantom Read）</span></a></li></ol></li></ol>
     </div>
 </div>
 
