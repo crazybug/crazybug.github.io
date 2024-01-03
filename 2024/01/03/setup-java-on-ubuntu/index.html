@@ -9,7 +9,7 @@
     
     <title>
         
-            在Ubuntu系统下配置JAVA |
+            在Ubuntu系统下配置Spring Boot开发环境 |
         
         Fenix blog
     </title>
@@ -163,7 +163,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        在Ubuntu系统下配置JAVA
+                        在Ubuntu系统下配置Spring Boot开发环境
                     </div>
                 
 
@@ -197,7 +197,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Wed Jan 03 2024 11:46:17 GMT+0800">2024-01-03 11:46:17</span>
+                <span class="pc" data-updated="Wed Jan 03 2024 13:32:50 GMT+0800">2024-01-03 13:32:50</span>
             </span>
         
 
@@ -208,7 +208,10 @@
                 <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/JAVA/">JAVA</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Java/">Java</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Spring-Boot/">Spring Boot</a></li>
                         
                     
                 </ul>
@@ -248,6 +251,35 @@
 <p>正常显示：</p>
 <figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java version &quot;21.0.1&quot; 2023-10-17 LTS</span><br><span class="line">Java(TM) SE Runtime Environment (build 21.0.1+12-LTS-29)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 21.0.1+12-LTS-29, mixed mode, sharing)</span><br></pre></td></tr></table></figure>
 
+<h3 id="安装Maven构建工具"><a href="#安装Maven构建工具" class="headerlink" title="安装Maven构建工具"></a>安装Maven构建工具</h3><p>Spring Boot项目依赖于Maven进行构建管理。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install maven</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建Spring-Boot项目"><a href="#创建Spring-Boot项目" class="headerlink" title="创建Spring Boot项目"></a>创建Spring Boot项目</h3><p>可以使用Spring Initializr(<a class="link"   target="_blank" rel="noopener" href="https://start.spring.io/" >https://start.spring.io<i class="fas fa-external-link-alt"></i></a>)<br>或者手动创建一个基本的Spring Boot项目结构。</p>
+<ul>
+<li>创建myproject文件夹</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> myproject</span><br><span class="line"><span class="built_in">cd</span> myproject</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>初始化一个空的Maven项目</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate \</span><br><span class="line">  -DgroupId=com.example \</span><br><span class="line">  -DartifactId=demo \</span><br><span class="line">  -DarchetypeArtifactId=maven-archetype-quickstart \</span><br><span class="line">  -DinteractiveMode=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>导入IDE：使用Eclipse&#x2F;IntelliJ IDEA都可以直接导入Maven项目。</p>
+</li>
+<li><p>添加Spring Boot相关依赖：在pom.xml文件中，添加必要的Boot Spring依赖。如Web应用程序：</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>编写和测试Spring Boot应用程序：<br>完成上述步骤后，就可以编写自己的Spring Boot应用程序了。可以在src&#x2F;main&#x2F;java目录下创建包和类，然后编写业务逻辑。可以使用内置的Tomcat服务器运行应用程序，也可以部署到外部容器中。</p>
+</li>
+<li><p>调试和运行应用程序：<br>可以使用IDE提供的调试功能来调试Spring Boot应用程序。默认情况下，将在localhost:8080上启动。</p>
+</li>
+</ul>
+
                 </div>
 
                 
@@ -258,7 +290,11 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/JAVA/">JAVA</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Java/">Java</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Spring-Boot/">Spring Boot</a>
                                     </li>
                                 
                             </ul>
@@ -310,7 +346,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8EJAVA%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BDJDK%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-text">从JAVA官网下载JDK安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8BJava%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-text">解压Java安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E9%AA%8C%E6%98%AF%E5%90%A6%E9%85%8D%E7%BD%AE%E5%AE%8C%E6%88%90"><span class="nav-text">检验是否配置完成</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8EJAVA%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BDJDK%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-text">从JAVA官网下载JDK安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8BJava%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-text">解压Java安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E9%AA%8C%E6%98%AF%E5%90%A6%E9%85%8D%E7%BD%AE%E5%AE%8C%E6%88%90"><span class="nav-text">检验是否配置完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Maven%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7"><span class="nav-text">安装Maven构建工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BASpring-Boot%E9%A1%B9%E7%9B%AE"><span class="nav-text">创建Spring Boot项目</span></a></li></ol>
     </div>
 </div>
 
@@ -440,7 +476,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8EJAVA%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BDJDK%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-text">从JAVA官网下载JDK安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8BJava%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-text">解压Java安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E9%AA%8C%E6%98%AF%E5%90%A6%E9%85%8D%E7%BD%AE%E5%AE%8C%E6%88%90"><span class="nav-text">检验是否配置完成</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8EJAVA%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BDJDK%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-text">从JAVA官网下载JDK安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8BJava%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-text">解压Java安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E9%AA%8C%E6%98%AF%E5%90%A6%E9%85%8D%E7%BD%AE%E5%AE%8C%E6%88%90"><span class="nav-text">检验是否配置完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Maven%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7"><span class="nav-text">安装Maven构建工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BASpring-Boot%E9%A1%B9%E7%9B%AE"><span class="nav-text">创建Spring Boot项目</span></a></li></ol>
     </div>
 </div>
 
