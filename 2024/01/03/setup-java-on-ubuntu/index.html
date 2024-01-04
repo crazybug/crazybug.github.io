@@ -197,7 +197,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Thu Jan 04 2024 14:26:52 GMT+0800">2024-01-04 14:26:52</span>
+                <span class="pc" data-updated="Thu Jan 04 2024 15:50:11 GMT+0800">2024-01-04 15:50:11</span>
             </span>
         
 
@@ -255,7 +255,26 @@
 <h3 id="也可以通过apt-intall安装OpenJDK17"><a href="#也可以通过apt-intall安装OpenJDK17" class="headerlink" title="也可以通过apt intall安装OpenJDK17"></a>也可以通过apt intall安装OpenJDK17</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install openjdk-17-jdk</span><br></pre></td></tr></table></figure>
 
 <h2 id="设置JAVA-HOME变量"><a href="#设置JAVA-HOME变量" class="headerlink" title="设置JAVA_HOME变量"></a>设置JAVA_HOME变量</h2><p>需要将JAVA_HOME变量指向JDK的安装路径</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/default-java</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看jdk的安装路径，which只能定位到执行路径</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> java</span><br><span class="line">/usr/bin/java</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果已配置$JAVA_HOME</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$JAVA_HOME</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过ls -lrt查找</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -lrt /usr/bin/java</span><br><span class="line">lrwxrwxrwx 1 root root 22 Jan  4 14:19 /usr/bin/java -&gt; /etc/alternatives/java</span><br></pre></td></tr></table></figure>
+
+<p>继续查找</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -lrt /etc/alternatives/java</span><br><span class="line">lrwxrwxrwx 1 root root 43 Jan  4 14:29 /etc/alternatives/java -&gt; /usr/lib/jvm/java-17-openjdk-amd64/bin/java</span><br></pre></td></tr></table></figure>
+
+<p>jkd路径为：<br>&#x3D;&#x3D;&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;java-17-openjkd-amd64&#x3D;&#x3D;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-17-openjkd-amd64</span><br></pre></td></tr></table></figure>
 
 <h3 id="安装Maven构建工具"><a href="#安装Maven构建工具" class="headerlink" title="安装Maven构建工具"></a>安装Maven构建工具</h3><p>Spring Boot项目依赖于Maven进行构建管理。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install maven</span><br></pre></td></tr></table></figure>
