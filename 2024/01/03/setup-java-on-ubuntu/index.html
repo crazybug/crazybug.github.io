@@ -197,7 +197,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="pc" data-updated="Fri Jan 05 2024 09:36:34 GMT+0800">2024-01-05 09:36:34</span>
+                <span class="pc" data-updated="Fri Jan 05 2024 09:40:34 GMT+0800">2024-01-05 09:40:34</span>
             </span>
         
 
@@ -239,7 +239,6 @@
 
 <h3 id="解压Java安装包"><a href="#解压Java安装包" class="headerlink" title="解压Java安装包"></a>解压Java安装包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr</span><br><span class="line">tar -zxvf /home/jdk-21_linux-x64_bin.tar.gz</span><br></pre></td></tr></table></figure>
 
-
 <h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano /etc/profile</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/jdk-21.0.1</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/lib:<span class="variable">$&#123;JRE_HOME&#125;</span>/lib</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
@@ -274,7 +273,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -lrt /etc/alternatives/java</span><br><span class="line">lrwxrwxrwx 1 root root 43 Jan  4 14:29 /etc/alternatives/java -&gt; /usr/lib/jvm/java-17-openjdk-amd64/bin/java</span><br></pre></td></tr></table></figure>
 
 <p>jkd路径为：<br><code>/usr/lib/jvm/java-17-openjkd-amd64</code></p>
-<p>export命令的效果仅限于当前登录终端</p>
+<p>export命令的效果仅限于当前登录终端，如果永久有效，需配置到&#x2F;etc&#x2F;profile</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-17-openjkd-amd64</span><br></pre></td></tr></table></figure>
 
 <h3 id="安装Maven构建工具"><a href="#安装Maven构建工具" class="headerlink" title="安装Maven构建工具"></a>安装Maven构建工具</h3><p>Spring Boot项目依赖于Maven进行构建管理。</p>
